@@ -8,7 +8,7 @@
  */
 
 // please change this to your E-Mail address
-$sendTo = "support@pixel-industry.com";
+$sendTo = "contato@speedguerreiros.com";
 
 $action = $_POST['action'];
 if ($action == 'contact') {
@@ -104,8 +104,8 @@ $headers = 'From: ' . $name . '<' . $email . ">\r\n" .
         'X-Mailer: PHP/' . phpversion();
 
 if (mail($sendTo, $subject, $message, $headers)) {
-    echo "Message sent succesfully.";
+    echo "Menssagem enviada com sucesso.";
 } else {
-    echo "There was problem while sending E-Mail.";
+    echo "Houve um problema ao enviar este e-mail, tente novamente mais tarde.";
 }
 ?>
