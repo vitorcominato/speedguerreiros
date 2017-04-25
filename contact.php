@@ -11,30 +11,29 @@
 $sendTo = "contato@speedguerreiros.com";
 
 $action = $_POST['action'];
-if ($action == 'contact') {
-    $inquiry = $_POST['form_data'][0]['inquiry'];
+if ($action == 'contact') {   
     $name = $_POST['form_data'][0]['name'];
     $lastname = $_POST['form_data'][0]['last_name'];
     $email = $_POST['form_data'][0]['email'];   
     $contact_message = $_POST['form_data'][0]['message'];
+    $subject = "Speed Guerreiros - Peça um orçamento";
 
     if ($name == "" || $email == "" || $contact_message == "") {
-        echo "There was problem while sending E-Mail. Please verify entered data and try again!";
+        echo "Houve um problema enquanto mandávamos o e-mail. Por favor verifique os dados inseridos e tente novamente.";
         exit();
     }
     
-    $message = 'Inquiry: ' . $inquiry . "\r\n"
-                        . "Name: " . $name . "\r\n"
-                        . "Last Name: " . $lastname . "\r\n"
+    $message = "Nome: " . $name . "\r\n"
+                        . "Sobrenome: " . $lastname . "\r\n"
                         . "Email: " . $email . "\r\n"
-                        . "Subject: " . $subject . "\r\n"
-                        . "Message: " . $contact_message . "\r\n";
+                        . "Assunto: " . $subject . "\r\n"
+                        . "Mensagem: " . $contact_message . "\r\n";
 } else if ($action == 'newsletter') {
     $email = $_POST['form_data'][0]['Email'];
     $name = $email;
 
     if ($email == "") {
-        echo "There was problem while sending E-Mail. Please verify entered data and try again!";
+        echo "Houve um problema enquanto mandávamos o e-mail. Por favor verifique os dados inseridos e tente novamente.";
         exit();
     }
     $subject = 'Newsletter Subscribe!';
@@ -47,7 +46,7 @@ if ($action == 'contact') {
     $subject = 'New comment!';
     
     if ($name == "" || $email == "" || $message == "") {
-        echo "There was problem while sending E-Mail. Please verify entered data and try again!";
+        echo "Houve um problema enquanto mandávamos o e-mail. Por favor verifique os dados inseridos e tente novamente.";
         exit();
     }
     
@@ -66,7 +65,7 @@ if ($action == 'contact') {
     $driver_experience = $_POST['form_data'][0]['driver_experience'];
 
     if ($driver_name == "" || $driver_last_name == "" || $driver_experience == "") {
-        echo "There was problem while sending E-Mail. Please verify entered data and try again!";
+        echo "Houve um problema enquanto mandávamos o e-mail. Por favor verifique os dados inseridos e tente novamente.";
         exit();
     }
     
