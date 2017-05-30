@@ -6,9 +6,24 @@
  * Note: Please edit $sendTo variable value to your email address.
  * 
  */
+require('./PHPMailer/PHPMailerAutoload.php');
+$mail=new PHPMailer();
+$mail->CharSet = 'UTF-8';
+$mail->IsSMTP();
+$mail->Host       = 'smtp.gmail.com';
 
-// please change this to your E-Mail address
-$sendTo = "contato@speedguerreiros.com";
+$mail->SMTPSecure = 'tls';
+$mail->Port       = 587;
+$mail->SMTPDebug  = 1;
+$mail->SMTPAuth   = true;
+
+$mail->Username   = 'vitor.cominato@gmail.com';
+$mail->Password   = 'c0cac0la';
+
+$mail->SetFrom('contato@speedguerreiros.com', $name);
+$mail->Subject    = 'Speed Guerreiros - Peça um orçamento';
+$mail->AddAddress('contato@speedguerreiros.com', 'Pedido de orçamento');
+
 
 $action = $_POST['action'];
 if ($action == 'contact') {   
@@ -23,11 +38,11 @@ if ($action == 'contact') {
         exit();
     }
     
-    $message = "Nome: " . $name . "\r\n"
-                        . "Sobrenome: " . $lastname . "\r\n"
-                        . "Email: " . $email . "\r\n"
-                        . "Assunto: " . $subject . "\r\n"
-                        . "Mensagem: " . $contact_message . "\r\n";
+    $message = "Nome: " . $name . "<br>"
+                        . "Sobrenome: " . $lastname . "<br>"
+                        . "Email: " . $email . "<br>"
+                        . "Assunto: " . $subject . "<br>"
+                        . "Mensagem: " . $contact_message . "<br>";
 } else if ($action == 'newsletter') {
     $email = $_POST['form_data'][0]['Email'];
     $name = $email;
@@ -97,14 +112,21 @@ else if ($action == 'shipping') {
             . "Number of packages: " . $tracking_packages . "\r\n"
             . "Email: " . $tracking_email . "\r\n"; 
 }
+$body = $message;
+$mail->MsgHTML($body);
 
 $headers = 'From: ' . $name . '<' . $email . ">\r\n" .
         'Reply-To: ' . $email . "\r\n" .
         'X-Mailer: PHP/' . phpversion();
 
-if (mail($sendTo, $subject, $message, $headers)) {
-    echo "Menssagem enviada com sucesso.";
-} else {
-    echo "Houve um problema ao enviar este e-mail, tente novamente mais tarde.";
+
+if(!$mail->send())
+{
+   echo "Message could not be sent. <p>";
+   echo "Mailer Error: " . $mail->ErrorInfo;
+   exit;
+}else{
+    echo "Mensagem enviada com sucesso.";
 }
+
 ?>

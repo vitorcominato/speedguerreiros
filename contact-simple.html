@@ -139,7 +139,7 @@
                                                 <a href="contact-simple.html">Fale Conosco</a>
                                                 <ul class="dropdown-menu">
                                                     <li class="current-menu-item"><a href="contact-simple.html">Contact simple</a></li>
-                                                    <li><a href="contact-locations.html">Contact locations</a></li>
+                                                    <!--<li><a href="contact-locations.html">Contact locations</a></li>-->
                                                 </ul><!-- .dropdown-menu end -->
                                             </li><!-- .dropdown end -->
                                         </ul><!-- .nav.navbar-nav end -->
@@ -481,7 +481,7 @@
         <script src="js/jquery-2.1.4.min.js"></script><!-- jQuery library -->
         <script src="js/bootstrap.min.js"></script><!-- .bootstrap script -->
         <script src="js/jquery.srcipts.min.js"></script><!-- modernizr, retina, stellar for parallax -->  
-        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script> <!-- google maps -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7Eak33xwjqoBKHOVXqnNXe8ResQ33a_I&v=3.exp&amp;sensor=false"></script> <!-- google maps -->
         <script src="js/jquery.ui.map.full.min.js"></script><!-- google maps -->
         <script src="js/jquery.dlmenu.min.js"></script><!-- for responsive menu -->
         <script src="js/include.js"></script><!-- custom js functions -->
@@ -495,7 +495,7 @@
 
                 function initialize() {
                     var map;
-
+                    /*  MapKey:  AIzaSyA7Eak33xwjqoBKHOVXqnNXe8ResQ33a_I    */
                     var nottingham = new google.maps.LatLng(-23.1873077, -46.9869211);
 
                     var style = [
@@ -551,7 +551,7 @@
                         position: nottingham,
                         map: map,
                         icon: pinIcon,
-                        title: 'Speed Guerreiros Headquarters, Nothingham'
+                        title: 'Speed Guerreiros Headquarters'
                     });
                 }
 
@@ -566,12 +566,13 @@
                     var email = $('#contact-email').val();
                     var contact_message = $('#contact-message').val();
                     var form_data = new Array({'inquiry': inquiry, 'name': name, 'last_name': lastname, 'email': email, 'message': contact_message});
+                    console.log(form_data);
                     $.ajax({
                         type: 'POST',
                         url: "contact.php",
                         data: ({'action': 'contact', 'form_data': form_data})
                     }).done(function (data) {
-                        alert(data);
+                        alert("Mensagem enviada com sucesso");
                     });
                 }); // CONTACT FORM AJAX SUBMIT END
 
